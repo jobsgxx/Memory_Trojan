@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/mvc ">
+    <!-- 自动扫描包，让指定包下的注解生效,由IOC容器统一管理 -->
+    <context:component-scan base-package="com.naihe.controller"/>
+    <!-- 让Spring MVC不处理静态资源 -->
+    <mvc:default-servlet-handler/>
+    <!-- 支持mvc注解驱动 在spring中一般采用@RequestMapping注解来完成映射关系
+    要想使@RequestMapping注解生效
+    必须向上下文中注册DefaultAnnotationHandlerMapping
+    和一个AnnotationMethodHandlerAdapter实例
+    这两个实例分别在类级别和方法级别处理。
+    而annotation-driven配置帮助我们自动完成上述两个实例的注入。 -->
+    <mvc:annotation-driven/>
+    <!-- 视图解析器 -->
+<!--    <bean id="/test" class="com.naihe.controller.test"/>-->
+<!--    <bean id="/t1" class="com.naihe.controller.HelloController2"/>-->
+<!--    <bean id="/mav" class="com.naihe.controller.Mav"/>-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver " id="internalResourceViewResolver">
+        <property name="contentType" value="text/html;charset=UTF-8"></property>
+        <!-- 前缀 -->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <!-- 后缀 -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+<!--    &lt;!&ndash; 配置注解驱动 &ndash;&gt;-->
+<!--    <mvc:annotation-driven />-->
+<!--    &lt;!&ndash; 配置视图  BeanNameViewResolver 解析器-->
+<!--        使用视图的名字来解析视图-->
+<!--        通过 order 属性来定义视图解析器的优先级, order 值越小优先级越高-->
+<!--    &ndash;&gt;-->
+<!--    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver">-->
+<!--        <property name="order" value="666"></property>-->
+<!--    </bean>-->
+<!--    &lt;!&ndash; 配置直接跳转的页面，无需经过Controller层-->
+<!--        http://localhost:8080/springmvc/index-->
+<!--        然后会跳转到 WEB-INF/views/index.jsp 页面-->
+<!--    &ndash;&gt;-->
+<!--    <mvc:view-controller path="/index" view-name="result"/>-->
+</beans>
